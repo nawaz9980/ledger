@@ -59,31 +59,40 @@ export function BossDashboardClient({ initialBills }: BossDashboardClientProps) 
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="flex flex-wrap gap-4"
+                    className="flex flex-wrap gap-6"
                 >
+                    {/* Critical Invoices Stat Card */}
                     <div className="relative group">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-                        <div className="relative px-6 py-4 bg-white ring-1 ring-slate-100 rounded-2xl flex items-center gap-4 min-w-[180px]">
-                            <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
-                                <AlertTriangle className="w-6 h-6 text-red-600" />
+                        <div className="absolute -inset-1 bg-gradient-to-br from-red-500/30 to-orange-500/10 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div className="relative px-8 py-6 bg-white/80 backdrop-blur-xl border border-white/50 ring-1 ring-slate-200/50 rounded-[2rem] shadow-[0_20px_40px_-15px_rgba(239,68,68,0.1)] flex items-center gap-6 min-w-[240px] group-hover:shadow-[0_25px_50px_-12px_rgba(239,68,68,0.2)] transition-all duration-500">
+                            <div className="w-14 h-14 bg-red-500 rounded-2xl flex items-center justify-center shadow-lg shadow-red-200 group-hover:scale-110 transition-transform duration-500">
+                                <AlertTriangle className="w-7 h-7 text-white" />
                             </div>
-                            <div>
-                                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Critical</p>
-                                <p className="text-2xl font-black text-slate-900">{criticalBills}</p>
+                            <div className="space-y-1">
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] leading-none">Critical Aged</p>
+                                <p className="text-3xl font-black text-slate-900 italic tracking-tighter">{criticalBills} <span className="text-xs text-red-600">INVOICES</span></p>
                             </div>
+                            {/* Decorative Shimmer */}
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-orange-400 rounded-t-[2rem] opacity-50"></div>
                         </div>
                     </div>
 
+                    {/* Outstanding Balance Stat Card */}
                     <div className="relative group">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-                        <div className="relative px-6 py-4 bg-white ring-1 ring-slate-100 rounded-2xl flex items-center gap-4 min-w-[220px]">
-                            <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                                <TrendingUp className="w-6 h-6 text-blue-600" />
+                        <div className="absolute -inset-1 bg-gradient-to-br from-blue-600/30 to-indigo-500/10 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div className="relative px-8 py-6 bg-white/80 backdrop-blur-xl border border-white/50 ring-1 ring-slate-200/50 rounded-[2rem] shadow-[0_20px_40px_-15px_rgba(37,99,235,0.1)] flex items-center gap-6 min-w-[300px] group-hover:shadow-[0_25px_50px_-12px_rgba(37,99,235,0.2)] transition-all duration-500">
+                            <div className="relative">
+                                <div className="absolute -inset-2 bg-blue-100 rounded-full blur-md opacity-50"></div>
+                                <div className="relative w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center shadow-xl group-hover:rotate-6 transition-transform duration-500">
+                                    <TrendingUp className="w-7 h-7 text-blue-400" />
+                                </div>
                             </div>
-                            <div>
-                                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Outstanding</p>
-                                <p className="text-2xl font-black text-slate-900">${totalOutstanding.toLocaleString(undefined, { minimumFractionDigits: 0 })}</p>
+                            <div className="space-y-1">
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] leading-none">Receivable Global</p>
+                                <p className="text-3xl font-black text-slate-900 italic tracking-tighter">${totalOutstanding.toLocaleString(undefined, { minimumFractionDigits: 0 })}</p>
                             </div>
+                            {/* Decorative Stripe */}
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-500 rounded-t-[2rem] opacity-50"></div>
                         </div>
                     </div>
                 </motion.div>
