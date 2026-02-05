@@ -37,16 +37,17 @@ import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
     companyId: z.string().min(1, "Please select a company"),
-    date: z.date({
-        invalid_type_error: "A valid date is required.",
-    }),
+    date: z.date({ message: "A valid date is required." }),
     invoiceNumber: z.string().min(1, "Invoice number is required"),
-    amount: z.coerce.number({
-        invalid_type_error: "Amount must be a number",
-    }).min(0.01, "Amount must be greater than 0"),
+    amount: z.coerce.number().min(0.01, "Amount must be greater than 0"),
 })
 
-type FormValues = z.infer<typeof formSchema>
+interface FormValues {
+    companyId: string
+    date: Date
+    invoiceNumber: string
+    amount: number
+}
 
 interface Company {
     id: string
@@ -62,13 +63,13 @@ export function BillForm({ companies }: BillFormProps) {
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     const form = useForm<FormValues>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(formSchema) as any,
         defaultValues: {
             companyId: "",
-            date: new Date() as any,
+            date: new Date(),
             invoiceNumber: "",
             amount: 0,
-        } as any,
+        },
     })
 
     async function onSubmit(values: FormValues) {
